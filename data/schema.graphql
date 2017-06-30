@@ -1,0 +1,47 @@
+type Location implements Node {
+  id: ID!
+  country: String
+  city: String
+  searchTerms: String
+}
+
+interface Node {
+  id: ID!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type PlacesConnection {
+  pageInfo: PageInfo!
+  edges: [PlacesEdge]
+}
+
+type PlacesEdge {
+  node: Location
+  cursor: String!
+}
+
+type Query {
+  node(id: ID!): Node
+  viewer(viewerId: Int): Viewer
+}
+
+type User implements Node {
+  id: ID!
+  firstName: String
+  lastName: String
+  login: String
+  email: String
+  enabled: Boolean
+}
+
+type Viewer implements Node {
+  id: ID!
+  user: User
+  places(after: String, first: Int, before: String, last: Int, search: String!): PlacesConnection
+}
