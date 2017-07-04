@@ -7,6 +7,7 @@ import AnonymousApp from '../components/AnonymousApp';
 import IdentityNumber from '../components/IdentityNumber';
 import NINAAppointmentRequest from '../components/NINAAppointmentRequest';
 import RAVECAppointmentRequest from '../components/RAVECAppointmentRequest';
+import DefaultAppointmentRequest from '../components/DefaultAppointmentRequest';
 import Login from '../components/user/Login';
 
 class RouteHome extends Relay.Route {
@@ -66,6 +67,7 @@ export default  <Route>
                         <IndexRoute component={IdentityNumber} queries={RouteHome.queries} prepareParams={getAnonymousDashboardParams} />
                         <Route path="appointment/nina" component={NINAAppointmentRequest} queries={RouteHome.queries} prepareParams={getAnonymousParams} />
                         <Route path="appointment/ravec" component={RAVECAppointmentRequest} queries={RouteHome.queries} prepareParams={getAnonymousParams} />
+                        <Route path="appointment/default" component={DefaultAppointmentRequest} queries={RouteHome.queries} prepareParams={getAnonymousParams} />
                     </Route>
                     <Route path="login" component={Login}  />
                 </Route>
