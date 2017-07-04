@@ -50,10 +50,10 @@ class IdentityNumber extends React.Component {
                             <div className="form-group">
                                 <div className="btn-group btn-group-justified col-md-12" role="group" >
                                     <div className="btn-group" role="group">
-                                        <button onClick={console.log('...')} type="button" className={"btn btn-default " + (this.state.document ==  1? "active" : "")} value="1">NINA</button>
+                                        <button onClick={() => this.context.router.push('/appointment/nina')} type="button" className={"btn btn-default " + (this.state.document ==  1? "active" : "")} value="1">NINA</button>
                                     </div>
                                     <div className="btn-group" role="group">
-                                        <button onClick={console.log('...')} type="button" className={"btn btn-default " + (this.state.document ==  2? "active" : "")} value="2">Récipissé RAVEC</button>
+                                        <button onClick={() => this.context.router.push('/appointment/ravec')} type="button" className={"btn btn-default " + (this.state.document ==  2? "active" : "")} value="2">Récipissé RAVEC</button>
                                     </div>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@ class IdentityNumber extends React.Component {
                                     <div className="btn-group" role="group">
                                         <hr/>
                                         <br/>
-                                        <button onClick={console.log('...')} type="button" className={"btn btn-default " + (this.state.document ==  1? "active" : "")} value="3">
+                                        <button onClick={() => this.context.router.push('/appointment/default')} type="button" className={"btn btn-default " + (this.state.document ==  1? "active" : "")} value="3">
                                             Cliquez ici si vous n'avez aucun numéro
                                         </button>
                                     </div>
