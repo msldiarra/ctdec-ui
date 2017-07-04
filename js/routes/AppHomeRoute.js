@@ -4,6 +4,7 @@ import IndexRoute from 'react-router/lib/IndexRoute';
 import Route from 'react-router/lib/Route';
 import AuthenticatedApp from '../components/user/AuthenticatedApp';
 import AnonymousApp from '../components/AnonymousApp';
+import AppointmentRequest from '../components/AppointmentRequest';
 import Login from '../components/user/Login';
 
 class RouteHome extends Relay.Route {
@@ -60,7 +61,7 @@ function getAnonymousDashboardParams(params, route){
 
 export default  <Route>
                     <Route path="/" component={AnonymousApp} queries={RouteHome.queries} prepareParams={getAnonymousParams} >
-                        <IndexRoute component={Dashboard} queries={RouteHome.queries} prepareParams={getAnonymousDashboardParams} />
+                        <IndexRoute component={AppointmentRequest} queries={RouteHome.queries} prepareParams={getAnonymousDashboardParams} />
                     </Route>
                     <Route path="login" component={Login}  />
                 </Route>

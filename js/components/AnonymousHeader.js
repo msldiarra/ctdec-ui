@@ -17,7 +17,7 @@ export default class AnonymousHeader extends React.Component {
                                 <span className="icon-bar"></span>
                                 <span className="icon-bar"></span>
                             </button>
-                            <a className="navbar-brand" href="#">SOFTESTATE</a>
+                            <a className="navbar-brand" href="#">CTDEC</a>
                         </div>
                         <div className="collapse navbar-collapse navbar-ex1-collapse">
                             <ul className="nav navbar-nav navbar-right">
