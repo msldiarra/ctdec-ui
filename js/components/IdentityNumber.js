@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 
 
 
-class NewProperty extends React.Component {
+class IdentityNumber extends React.Component {
 
     constructor(props) {
         super(props);
@@ -14,11 +14,6 @@ class NewProperty extends React.Component {
             document : 0
         } ;
     }
-
-    changePropertyType(e) {
-        this.setState({propertyType: e.target.value});
-    }
-
 
 
     render() {
@@ -82,11 +77,11 @@ class NewProperty extends React.Component {
 }
 
 
-NewProperty.contextTypes = {
+IdentityNumber.contextTypes = {
     router: React.PropTypes.object.isRequired
 }
 
-export default Relay.createContainer(NewProperty, {
+export default Relay.createContainer(IdentityNumber, {
 
     fragments: {
         viewer: () => Relay.QL`

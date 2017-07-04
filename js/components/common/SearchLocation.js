@@ -25,7 +25,7 @@ class SearchLocation extends React.Component {
         if(e.keyCode === 13 ) {
             const location = e.target.getAttribute('data-location');
             ReactDOM.findDOMNode(this.refs.locationInput)
-                .value = location.neighborhood? location.city +', '+ location.neighborhood: location.city;
+                .value = location.city? location.city +', '+ location.country: location.country;
             this.props.onLocationEnter(location);
             this.setState({searchedText: '', isVisible: false},
                 () =>  this.props.relay.forceFetch({search: '' })
@@ -47,10 +47,10 @@ class SearchLocation extends React.Component {
         if(target.tagName == 'LI') {
 
             const city = target.getAttribute('data-city');
-            const neighborhood = target.getAttribute('data-neighborhood');
+            const country = target.getAttribute('data-country');
             ReactDOM.findDOMNode(this.refs.locationInput)
-                .value = neighborhood? city +', '+ neighborhood: city;
-            this.props.onLocationEnter({'city': city, 'neighborhood': neighborhood});
+                .value = city? city +', '+ country: country;
+            this.props.onLocationEnter({'city': city, 'country': country});
             this.setState({searchedText: '', isVisible: false},
                 () =>  this.props.relay.forceFetch({search: '' })
             )
@@ -80,10 +80,10 @@ class SearchLocation extends React.Component {
 
         var places = this.props.viewer.places.edges.map(function(edge){
 
-            const place = edge.node.neighborhood ? edge.node.city +', '+ edge.node.neighborhood : edge.node.city;
+            const place = edge.node.city ? edge.node.city +', '+ edge.node.country : edge.node.country;
             tabIndex++;
 
-            return <li key={edge.node.id}   data-city={edge.node.city} data-neighborhood ={edge.node.neighborhood} tabIndex={tabIndex} className="col-md-12 col-lg-12 col-xs-12"
+            return <li key={edge.node.id}   data-city={edge.node.city} data-country ={edge.node.country} tabIndex={tabIndex} className="col-md-12 col-lg-12 col-xs-12"
                        onClick={this.handleClick.bind(this)}  onKeyDown={this.handlePressEnter.bind(this)} >
                         <div><b>{place}</b></div>
                     </li>
@@ -132,7 +132,6 @@ export default Relay.createContainer(SearchLocation, {
                       id
                       country
                       city
-                      neighborhood
                     }
                   },
                 },
