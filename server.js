@@ -131,6 +131,7 @@ app.post('/api/authenticate', (request, response) => {
         });
 });
 
+
 app.listen(apiPort);
 
 var application = express();
@@ -145,7 +146,7 @@ application.all('/api/*', (req, res) => {
     proxy.web(req, res, {
         target: `http://localhost:${apiPort}`
     })
-})
+});
 
 if(!isProduction) {
 

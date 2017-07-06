@@ -15,7 +15,6 @@ class IdentityNumber extends React.Component {
         } ;
     }
 
-
     render() {
         const text = this.state.message;
 
@@ -36,7 +35,7 @@ class IdentityNumber extends React.Component {
                             <div className="form-group">
                                 <div className="btn-group btn-group-justified col-md-12" role="group" >
                                     <p>
-                                        Bienvenu !
+                                        Bienvenue !
                                         <br/><br/>
                                         Ici, vous pouvez prendre un rendez-vous pour récupérer votre fiche individuelle.
                                         <br/><br/>

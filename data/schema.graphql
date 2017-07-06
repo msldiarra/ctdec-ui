@@ -5,6 +5,10 @@ type Location implements Node {
   searchTerms: String
 }
 
+type Mutation {
+  requestAppointmentByNINAMutation(input: RequestAppointmentByNINAInput!): RequestAppointmentByNINAPayload
+}
+
 interface Node {
   id: ID!
 }
@@ -29,6 +33,21 @@ type PlacesEdge {
 type Query {
   node(id: ID!): Node
   viewer(viewerId: Int): Viewer
+}
+
+input RequestAppointmentByNINAInput {
+  viewerId: String!
+  nina: String!
+  phone: String!
+  mail: String!
+  city: String
+  country: String
+  clientMutationId: String!
+}
+
+type RequestAppointmentByNINAPayload {
+  viewer: Viewer
+  clientMutationId: String!
 }
 
 type User implements Node {
