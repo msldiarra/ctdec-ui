@@ -28,8 +28,11 @@ export default mutationWithClientMutationId({
         return AppointmentService
             .appointmentByReference('NINA', nina, phone, mail, city, country)
             .then(response => {
-                if(response == true) console.log(response);
-                else throw new Error();
+
+                console.log('response : ')
+                console.log(response)
+
+                if(response.statusCode != 200)  throw new Error();
             })
             .then(() => {
                 return {
