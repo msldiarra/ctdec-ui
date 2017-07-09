@@ -5,14 +5,14 @@ import _ from 'lodash'
 export default class RequestAppointmentByReceiptMutation extends Relay.Mutation {
 
     getMutation() {
-        return Relay.QL`mutation {requestAppointmentByNINAMutation}`;
+        return Relay.QL`mutation {requestAppointmentByReceiptMutation}`;
     }
 
 
     getVariables() {
         return {
             viewerId : this.props.viewerId,
-            nina : this.props.nina,
+            reference : this.props.reference,
             phone : this.props.phone,
             mail : this.props.mail,
             city : this.props.city,

@@ -7,6 +7,7 @@ type Location implements Node {
 
 type Mutation {
   requestAppointmentByNINAMutation(input: RequestAppointmentByNINAInput!): RequestAppointmentByNINAPayload
+  requestAppointmentByReceiptMutation(input: RequestAppointmentByReceiptInput!): RequestAppointmentByReceiptPayload
 }
 
 interface Node {
@@ -46,6 +47,21 @@ input RequestAppointmentByNINAInput {
 }
 
 type RequestAppointmentByNINAPayload {
+  viewer: Viewer
+  clientMutationId: String!
+}
+
+input RequestAppointmentByReceiptInput {
+  viewerId: String!
+  reference: String!
+  phone: String!
+  mail: String!
+  city: String
+  country: String
+  clientMutationId: String!
+}
+
+type RequestAppointmentByReceiptPayload {
   viewer: Viewer
   clientMutationId: String!
 }
