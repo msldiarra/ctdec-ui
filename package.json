@@ -56,6 +56,7 @@
     "sanitize-filename": "^1.6.0",
     "sequelize": "^3.21.0",
     "slick-carousel": "^1.6.0",
+    "then-request": "^3.2.0",
     "underscore": "^1.8.3",
     "webpack": "1.12.13",
     "webpack-dev-server": "1.14.1",
