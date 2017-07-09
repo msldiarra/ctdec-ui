@@ -6,12 +6,15 @@ class AppointmentService {
 
     appointmentByReference(type, reference, phone, mail, city, country) {
 
+        var today = moment().format('YYYY-MM-DD');
+
         return request('POST',
             'http://localhost:8080/ctdec-appointment/rs/appointments',
             {json: {
                 type : type,
                 parameters : [{name : type, value : reference}],
-                date : moment().format('YYYY-MM-DD'),
+                date : today,
+                status : [{status: "STARTED", "date" : today}],
                 contact : { phoneNumber: {number : phone},  email : [{address : mail}] },
                 location : {country : {name : country, code: "ML"}, city : { name : city } },
                 channel : "MAIL"

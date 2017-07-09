@@ -2,7 +2,7 @@ import Relay from 'react-relay';
 import _ from 'lodash'
 
 
-export default class RequestAppointmentByReceiptMutation extends Relay.Mutation {
+export default class RequestAppointmentByNINAMutation extends Relay.Mutation {
 
     getMutation() {
         return Relay.QL`mutation {requestAppointmentByNINAMutation}`;
@@ -23,7 +23,7 @@ export default class RequestAppointmentByReceiptMutation extends Relay.Mutation 
 
     getFatQuery() {
         return Relay.QL`
-          fragment on RequestAppointmentByReceiptPayload {
+          fragment on RequestAppointmentByNINAPayload {
               viewer
           }
     `;
