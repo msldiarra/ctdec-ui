@@ -14,6 +14,7 @@ export const DB = new Sequelize(
 export const Places = DB.define('places', {
         country: Sequelize.STRING,
         city: Sequelize.STRING,
+        code: Sequelize.STRING,
         search_terms: Sequelize.STRING
     } , {timestamps: false, freezeTableName: true}
 );

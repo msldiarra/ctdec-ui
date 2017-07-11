@@ -48,9 +48,10 @@ class SearchLocation extends React.Component {
 
             const city = target.getAttribute('data-city');
             const country = target.getAttribute('data-country');
+            const countryCode = target.getAttribute('data-code');
             ReactDOM.findDOMNode(this.refs.locationInput)
                 .value = city? city +', '+ country: country;
-            this.props.onLocationEnter({'city': city, 'country': country});
+            this.props.onLocationEnter({'city': city, 'country': country, 'countryCode': countryCode});
             this.setState({searchedText: '', isVisible: false},
                 () =>  this.props.relay.forceFetch({search: '' })
             )
@@ -83,7 +84,7 @@ class SearchLocation extends React.Component {
             const place = edge.node.city ? edge.node.city +', '+ edge.node.country : edge.node.country;
             tabIndex++;
 
-            return <li key={edge.node.id}   data-city={edge.node.city} data-country ={edge.node.country} tabIndex={tabIndex} className="col-md-12 col-lg-12 col-xs-12"
+            return <li key={edge.node.id}   data-city={edge.node.city} data-country ={edge.node.country} data-code ={edge.node.code} tabIndex={tabIndex} className="col-md-12 col-lg-12 col-xs-12"
                        onClick={this.handleClick.bind(this)}  onKeyDown={this.handlePressEnter.bind(this)} >
                         <div><b>{place}</b></div>
                     </li>
@@ -132,6 +133,7 @@ export default Relay.createContainer(SearchLocation, {
                       id
                       country
                       city
+                      code
                     }
                   },
                 },

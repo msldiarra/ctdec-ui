@@ -169,6 +169,18 @@
               "deprecationReason": null
             },
             {
+              "name": "code",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "searchTerms",
               "description": null,
               "args": [],
@@ -724,6 +736,16 @@
               "defaultValue": null
             },
             {
+              "name": "countryCode",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
               "name": "clientMutationId",
               "description": null,
               "type": {
@@ -855,6 +877,16 @@
             },
             {
               "name": "country",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "countryCode",
               "description": null,
               "type": {
                 "kind": "SCALAR",

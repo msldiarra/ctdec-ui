@@ -17,6 +17,7 @@ export default class RequestAppointmentByNINAMutation extends Relay.Mutation {
             mail : this.props.mail,
             city : this.props.city,
             country : this.props.country,
+            countryCode : this.props.countryCode
 
         };
     }

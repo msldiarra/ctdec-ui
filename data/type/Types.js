@@ -39,6 +39,7 @@ export const placeType = new GraphQLObjectType({
             id: globalIdField('Place'),
             country: { type: GraphQLString, resolve(place) { return place.country } },
             city: { type: GraphQLString, resolve(place) { return place.city } },
+            code: { type: GraphQLString, resolve(place) { return place.code } },
             searchTerms: { type: GraphQLString, resolve(place) { return place.searchTerms } },
         }
     },

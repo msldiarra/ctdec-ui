@@ -16,6 +16,7 @@ export default mutationWithClientMutationId({
         mail: { type: new GraphQLNonNull(GraphQLString) },
         city: { type: GraphQLString },
         country: { type: GraphQLString },
+        countryCode: { type: GraphQLString }
     },
     outputFields: {
         viewer: {
@@ -23,10 +24,10 @@ export default mutationWithClientMutationId({
             resolve: ({viewerId}) => getViewer(viewerId),
         }
     },
-    mutateAndGetPayload: ({viewerId, reference, phone, mail, city, country}) => {
-
+    mutateAndGetPayload: ({viewerId, reference, phone, mail, city, country, countryCode}) => {
+        countryCode = countryCode || "ML";
         return AppointmentService
-            .appointmentByReference('RECEIPT', reference, phone, mail, city, country)
+            .appointmentByReference('RECEIPT', reference, phone, mail, city, country, countryCode)
             .then(response => {
 
                 if(response.statusCode != 200)  throw new Error();

@@ -4,7 +4,8 @@ import moment from 'moment'
 
 class AppointmentService {
 
-    appointmentByReference(type, reference, phone, mail, city, country) {
+    appointmentByReference(type, reference, phone, mail, city, country, countryCode) {
+        countryCode = countryCode || "ML";
 
         var today = moment().format('YYYY-MM-DD');
 
@@ -16,7 +17,7 @@ class AppointmentService {
                 date : today,
                 status : [{status: "STARTED", "date" : today}],
                 contact : { phoneNumber: {number : phone},  email : [{address : mail}] },
-                location : {country : {name : country, code: "ML"}, city : { name : city } },
+                location : {country : {name : country, code: countryCode}, city : { name : city } },
                 channel : "MAIL"
             }}
         );

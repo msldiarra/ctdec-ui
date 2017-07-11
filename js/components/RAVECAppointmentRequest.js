@@ -14,6 +14,7 @@ class RAVECAppointmentRequest extends React.Component {
         this.state = {
             message : "",
             country: '',
+            countryCode: '',
             city: '',
             location: ''
         } ;
@@ -21,7 +22,7 @@ class RAVECAppointmentRequest extends React.Component {
 
     onLocationEnter(location) {
         this.setState({ location : location.city ? location.city +', '+ location.country: location.city,
-            city: location.city,
+            city: location.city, country: location.country, countryCode: location.countryCode
         });
     }
 
@@ -32,8 +33,11 @@ class RAVECAppointmentRequest extends React.Component {
         var reference =  this.refs.ravec.value;
         var city = this.state.city;
         var country = this.state.country;
+        var countryCode = this.state.countryCode;
         var mail =  this.refs.email.value;
         var phone =  new Chance().word({length: 8, pool: '0123456789'});
+
+        console.log('countryCode : ' + countryCode)
 
         var mutation = new RequestAppointmentByReceiptMutation({
             viewer: this.props.viewer,
@@ -41,6 +45,7 @@ class RAVECAppointmentRequest extends React.Component {
             reference: reference,
             city: city,
             country: country,
+            countryCode: countryCode,
             mail: mail,
             phone: phone
         });

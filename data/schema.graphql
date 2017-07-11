@@ -2,6 +2,7 @@ type Location implements Node {
   id: ID!
   country: String
   city: String
+  code: String
   searchTerms: String
 }
 
@@ -43,6 +44,7 @@ input RequestAppointmentByNINAInput {
   mail: String!
   city: String
   country: String
+  countryCode: String
   clientMutationId: String!
 }
 
@@ -58,6 +60,7 @@ input RequestAppointmentByReceiptInput {
   mail: String!
   city: String
   country: String
+  countryCode: String
   clientMutationId: String!
 }
 

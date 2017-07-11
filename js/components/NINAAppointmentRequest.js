@@ -14,6 +14,7 @@ class NINAAppointmentRequest extends React.Component {
         this.state = {
             message : "",
             country: '',
+            countryCode: '',
             city: '',
             location: ''
         } ;
@@ -21,7 +22,7 @@ class NINAAppointmentRequest extends React.Component {
 
     onLocationEnter(location) {
         this.setState({ location : location.city ? location.city +', '+ location.country: location.city,
-            city: location.city, country: location.country
+            city: location.city, country: location.country, countryCode: location.countryCode
         });
     }
 
@@ -32,6 +33,7 @@ class NINAAppointmentRequest extends React.Component {
         var reference =  this.refs.nina.value;
         var city = this.state.city;
         var country = this.state.country;
+        var countryCode = this.state.countryCode;
         var mail =  this.refs.email.value;
         var phone =  new Chance().word({length: 8, pool: '0123456789'});
 
@@ -42,7 +44,8 @@ class NINAAppointmentRequest extends React.Component {
             city: city,
             country: country,
             mail: mail,
-            phone: phone
+            phone: phone,
+            countryCode: countryCode
         });
 
         var onSuccess = () => this.context.router.push('/');
