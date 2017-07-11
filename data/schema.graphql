@@ -9,6 +9,7 @@ type Location implements Node {
 type Mutation {
   requestAppointmentByNINAMutation(input: RequestAppointmentByNINAInput!): RequestAppointmentByNINAPayload
   requestAppointmentByReceiptMutation(input: RequestAppointmentByReceiptInput!): RequestAppointmentByReceiptPayload
+  requestAppointmentByDefaultMutation(input: RequestAppointmentByDefaultInput!): RequestAppointmentByDefaultPayload
 }
 
 interface Node {
@@ -35,6 +36,25 @@ type PlacesEdge {
 type Query {
   node(id: ID!): Node
   viewer(viewerId: Int): Viewer
+}
+
+input RequestAppointmentByDefaultInput {
+  viewerId: String!
+  mail: String!
+  city: String
+  country: String
+  countryCode: String
+  lastName: String
+  firstName: String
+  fatherFirstName: String
+  motherFirstName: String
+  motherLastName: String
+  clientMutationId: String!
+}
+
+type RequestAppointmentByDefaultPayload {
+  viewer: Viewer
+  clientMutationId: String!
 }
 
 input RequestAppointmentByNINAInput {
