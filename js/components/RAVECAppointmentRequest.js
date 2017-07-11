@@ -37,8 +37,6 @@ class RAVECAppointmentRequest extends React.Component {
         var mail =  this.refs.email.value;
         var phone =  new Chance().word({length: 8, pool: '0123456789'});
 
-        console.log('countryCode : ' + countryCode)
-
         var mutation = new RequestAppointmentByReceiptMutation({
             viewer: this.props.viewer,
             viewerId: this.props.viewer.id,

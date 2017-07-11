@@ -29,10 +29,6 @@ export default mutationWithClientMutationId({
         return AppointmentService
             .appointmentByReference('NINA', nina, phone, mail, city, country, countryCode)
             .then(response => {
-
-                console.log('response : ')
-                console.log(response)
-
                 if(response.statusCode != 200)  throw new Error();
             })
             .then(() => {
