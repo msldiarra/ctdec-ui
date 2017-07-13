@@ -35,7 +35,7 @@ class Login extends React.Component {
         return (
             <div>
                 <form className="form-signin">
-                    <h2 className="form-signin-heading text-center cursive">SOFTESTATE</h2>
+                    <h2 className="form-signin-heading text-center cursive">CTDEC Fiches individuelles</h2>
                     <hr/>
                     <div className="form-group">
                         <label htmlFor="username" className="sr-only">Identifiant</label>

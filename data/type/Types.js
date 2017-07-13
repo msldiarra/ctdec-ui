@@ -1,6 +1,6 @@
 import { GraphQLNonNull, GraphQLObjectType, GraphQLString, GraphQLList, GraphQLBoolean, GraphQLInt, GraphQLFloat, GraphQLScalarType, GraphQLError, Kind } from 'graphql';
 import { connectionArgs, connectionFromPromisedArray, globalIdField, nodeDefinitions, fromGlobalId, connectionDefinitions} from 'graphql-relay';
-import { DB, User, Places }from '../database';
+import { DB, User, Places, Appointments }from '../database';
 import { Viewer, getViewer } from '../store/UserStore';
 import moment from 'moment';
 
@@ -15,6 +15,7 @@ export const {nodeInterface, nodeField} = nodeDefinitions(
 
         if (type === 'User') { return DB.models.user.findOne({where: {id: id}}); }
         if (type === 'Places') { return DB.models.places.findOne({where: {id: id}}); }
+        if (type === 'Appointments') { return DB.models.appointments.findOne({where: {id: id}}); }
         if (type === 'Viewer') { return getViewer(id)}
         else { return null; }
     },
@@ -24,7 +25,8 @@ export const {nodeInterface, nodeField} = nodeDefinitions(
 
         
         if (obj instanceof User.Instance) { return userType; }
-        else if (obj instanceof Places.Instance) { return placeTypeType; }
+        else if (obj instanceof Places.Instance) { return placeType; }
+        else if (obj instanceof Appointments.Instance) { return appointmentType; }
         else if (obj.id.startsWith('me')) { return viewerType; }
         else {
             return null;
@@ -41,6 +43,27 @@ export const placeType = new GraphQLObjectType({
             city: { type: GraphQLString, resolve(place) { return place.city } },
             code: { type: GraphQLString, resolve(place) { return place.code } },
             searchTerms: { type: GraphQLString, resolve(place) { return place.searchTerms } },
+        }
+    },
+    interfaces: () => [nodeInterface]
+});
+
+
+export const appointmentType = new GraphQLObjectType({
+    name: 'Appointment',
+    fields: () => {
+        return {
+            id: globalIdField('Appointment'),
+            number: { type: GraphQLString, resolve(appointment) { return appointment.number } },
+            date: { type: GraphQLMoment, resolve(appointment) { return GraphQLMoment.serialize(appointment.date)} },
+            status: { type: GraphQLString, resolve(appointment) { return appointment.status } },
+            receipt: { type: GraphQLString, resolve(appointment) { return appointment.receipt } },
+            nina: { type: GraphQLString, resolve(appointment) { return appointment.nina } },
+            firstName: { type: GraphQLString, resolve(appointment) { return appointment.firstname } },
+            lastName: { type: GraphQLString, resolve(appointment) { return appointment.lastname } },
+            fatherFirstName: { type: GraphQLString, resolve(appointment) { return appointment.fatherfirstname } },
+            motherFirstName: { type: GraphQLString, resolve(appointment) { return appointment.motherfirstname } },
+            motherLastName: { type: GraphQLString, resolve(appointment) { return appointment.motherlastname } }
         }
     },
     interfaces: () => [nodeInterface]
@@ -86,6 +109,24 @@ export const userType = new GraphQLObjectType({
             login: { type: GraphQLString, resolve: (obj) => obj.login },
             email: { type: GraphQLString, resolve: (obj) => obj.email },
             enabled: { type: GraphQLBoolean, resolve: (obj) => obj.enabled },
+            appointments : {
+            type: appointmentConnection,
+                description: "List of available locations",
+                args: {
+            ...connectionArgs,
+                    status: {
+                    name: 'status',
+                        type: new GraphQLNonNull(GraphQLString)
+                }
+            },
+            resolve: (_, args) => {
+                var term = args.status? args.status : 'PLANNED';
+                return connectionFromPromisedArray(DB.models.appointments.findAll({
+                    where: {status: {$like: term} },
+                    order: '"id"'
+                }), args)
+            }
+        },
         }
     },
     interfaces: [nodeInterface]
@@ -128,6 +169,12 @@ export const {connectionType: placeConnection} =
     connectionDefinitions({
         name: 'Places',
         nodeType: placeType
+    });
+
+export const {connectionType: appointmentConnection} =
+    connectionDefinitions({
+        name: 'Appointments',
+        nodeType: appointmentType
     });
 
 

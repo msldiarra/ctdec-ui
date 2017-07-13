@@ -6,6 +6,7 @@ import AuthenticatedApp from '../components/user/AuthenticatedApp';
 import AnonymousApp from '../components/AnonymousApp';
 import IdentityNumber from '../components/IdentityNumber';
 import NINAAppointmentRequest from '../components/NINAAppointmentRequest';
+import Dashboard from '../components/user/Dashboard';
 import RAVECAppointmentRequest from '../components/RAVECAppointmentRequest';
 import DefaultAppointmentRequest from '../components/DefaultAppointmentRequest';
 import Login from '../components/user/Login';
@@ -68,6 +69,9 @@ export default  <Route>
                         <Route path="appointment/nina" component={NINAAppointmentRequest} queries={RouteHome.queries} prepareParams={getAnonymousParams} />
                         <Route path="appointment/ravec" component={RAVECAppointmentRequest} queries={RouteHome.queries} prepareParams={getAnonymousParams} />
                         <Route path="appointment/default" component={DefaultAppointmentRequest} queries={RouteHome.queries} prepareParams={getAnonymousParams} />
+                    </Route>
+                    <Route path="/admin" component={AuthenticatedApp} queries={RouteHome.queries} prepareParams={getParams} >
+                        <IndexRoute component={Dashboard} queries={RouteHome.queries} prepareParams={getParams} onEnter={requireAuth} />
                     </Route>
                     <Route path="login" component={Login}  />
                 </Route>

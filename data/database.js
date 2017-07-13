@@ -19,6 +19,20 @@ export const Places = DB.define('places', {
     } , {timestamps: false, freezeTableName: true}
 );
 
+export const Appointments = DB.define('appointments', {
+        number: Sequelize.STRING,
+        date: Sequelize.DATE,
+        status: Sequelize.STRING,
+        receipt: Sequelize.STRING,
+        nina: Sequelize.STRING,
+        firstname: Sequelize.STRING,
+        lastname: Sequelize.STRING,
+        fatherfirstname: Sequelize.STRING,
+        motherfirstname: Sequelize.STRING,
+        motherlastname: Sequelize.STRING
+    } , {timestamps: false, freezeTableName: true}
+);
+
 /*
  * User view for UI display need
  * */

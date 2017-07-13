@@ -1,3 +1,29 @@
+type Appointment implements Node {
+  id: ID!
+  number: String
+  date: Date
+  status: String
+  receipt: String
+  nina: String
+  firstName: String
+  lastName: String
+  fatherFirstName: String
+  motherFirstName: String
+  motherLastName: String
+}
+
+type AppointmentsConnection {
+  pageInfo: PageInfo!
+  edges: [AppointmentsEdge]
+}
+
+type AppointmentsEdge {
+  node: Appointment
+  cursor: String!
+}
+
+scalar Date
+
 type Location implements Node {
   id: ID!
   country: String
@@ -96,6 +122,7 @@ type User implements Node {
   login: String
   email: String
   enabled: Boolean
+  appointments(after: String, first: Int, before: String, last: Int, status: String!): AppointmentsConnection
 }
 
 type Viewer implements Node {
