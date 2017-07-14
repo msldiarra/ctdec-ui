@@ -11,9 +11,6 @@ class Dashboard extends React.Component {
 
                 </div>
                 <Appointments appointments={this.props.viewer} />
-                <br/>
-                <footer className="text-center">&copy;2017 UL- L'Usine Logicielle</footer>
-                <br/>
             </div>
         );
     }

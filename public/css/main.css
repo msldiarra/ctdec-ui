@@ -106,7 +106,15 @@ ul.tanks li span.box {
     background: red
 }
 .orange {
-    background: orange
+    color: orange
+}
+
+.green {
+    color: green
+}
+
+.grey {
+    color: grey
 }
 
 .cblack {
@@ -263,6 +271,11 @@ a {
     width: 100%;
     table-layout: fixed;
     border-collapse: separate;
+}
+
+.table > tbody > tr > td, .table > thead > tr > th {
+    vertical-align: middle;
+    text-align: center;
 }
 
 .example-appear {
