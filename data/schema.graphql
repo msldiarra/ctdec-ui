@@ -3,6 +3,7 @@ type Appointment implements Node {
   number: String
   date: Date
   status: String
+  location: String
   receipt: String
   nina: String
   firstName: String

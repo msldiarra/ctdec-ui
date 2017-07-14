@@ -57,6 +57,7 @@ export const appointmentType = new GraphQLObjectType({
             number: { type: GraphQLString, resolve(appointment) { return appointment.number } },
             date: { type: GraphQLMoment, resolve(appointment) { return GraphQLMoment.serialize(appointment.date)} },
             status: { type: GraphQLString, resolve(appointment) { return appointment.status } },
+            location: { type: GraphQLString, resolve(appointment) { return appointment.location } },
             receipt: { type: GraphQLString, resolve(appointment) { return appointment.receipt } },
             nina: { type: GraphQLString, resolve(appointment) { return appointment.nina } },
             firstName: { type: GraphQLString, resolve(appointment) { return appointment.firstname } },

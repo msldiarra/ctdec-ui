@@ -75,6 +75,7 @@ class Appointments extends React.Component {
                             <tr>
                                 <th>Statut</th>
                                 <th>Date</th>
+                                <th>Lieu</th>
                                 <th>Nom</th>
                                 <th>Type</th>
                             </tr>
@@ -109,6 +110,7 @@ export default Relay.createContainer(Appointments, {
                       number
                       date
                       status
+                      location
                       receipt
                       nina
                       firstName

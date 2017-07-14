@@ -23,12 +23,14 @@ export default class Appointment extends React.Component {
             status =  <i className="fa fa-square grey" aria-hidden="true"></i>
         }
 
-        return <tr>
+        return (
+        <tr>
             <td>{status}</td>
             <td>{moment(appointment.date).format('DD-MM-YYYY')}</td>
+            <td>{appointment.location}</td>
             <td>{name}</td>
             <td>{appointment.nina? 'NINA' : (appointment.receipt? 'RECEIPT': 'DEFAULT')}</td>
-        </tr>
+        </tr> )
     }
 }
 
