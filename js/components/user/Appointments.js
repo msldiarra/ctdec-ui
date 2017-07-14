@@ -78,6 +78,7 @@ class Appointments extends React.Component {
                                 <th>Lieu</th>
                                 <th>Nom</th>
                                 <th>Type</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>

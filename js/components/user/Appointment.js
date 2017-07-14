@@ -30,6 +30,13 @@ export default class Appointment extends React.Component {
             <td>{appointment.location}</td>
             <td>{name}</td>
             <td>{appointment.nina? 'NINA' : (appointment.receipt? 'RECEIPT': 'DEFAULT')}</td>
+            <td>
+                <div className="form-group">
+                    <div className="col-md-12">
+                        <inupt type="submit" className="btn btn-default" onClick={console.log('')}><b>Traiter le RDV</b></inupt>
+                    </div>
+                </div>
+            </td>
         </tr> )
     }
 }
