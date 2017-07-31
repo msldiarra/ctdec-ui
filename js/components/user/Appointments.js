@@ -46,9 +46,9 @@ class Appointments extends React.Component {
         </div>;
 
         if(this.props.appointments.user.appointments.edges.length > 0) {
-
+            var viewer = this.props.appointments;
             requests = this.props.appointments.user.appointments.edges.map(function (edge) {
-                return <Appointment key={edge.node.id} appointment={edge.node}/>
+                return <Appointment key={edge.node.id} viewer={viewer} appointment={edge.node}/>
 
             });
 
@@ -102,6 +102,7 @@ export default Relay.createContainer(Appointments, {
     fragments: {
         appointments: () => Relay.QL`
           fragment on Viewer {
+            id
             user {
                 id
                 appointments(status: $status, first: $count) {

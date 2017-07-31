@@ -23,6 +23,18 @@ type AppointmentsEdge {
   cursor: String!
 }
 
+input AssignAppointmentToUserInput {
+  viewerId: String!
+  appointmentNumber: String!
+  userId: Int!
+  clientMutationId: String!
+}
+
+type AssignAppointmentToUserPayload {
+  viewer: Viewer
+  clientMutationId: String!
+}
+
 scalar Date
 
 type Location implements Node {
@@ -37,6 +49,7 @@ type Mutation {
   requestAppointmentByNINAMutation(input: RequestAppointmentByNINAInput!): RequestAppointmentByNINAPayload
   requestAppointmentByReceiptMutation(input: RequestAppointmentByReceiptInput!): RequestAppointmentByReceiptPayload
   requestAppointmentByDefaultMutation(input: RequestAppointmentByDefaultInput!): RequestAppointmentByDefaultPayload
+  assignAppointmentToUserMutation(input: AssignAppointmentToUserInput!): AssignAppointmentToUserPayload
 }
 
 interface Node {

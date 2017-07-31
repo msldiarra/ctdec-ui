@@ -3,6 +3,7 @@ import {  GraphQLObjectType } from 'graphql';
 import RequestAppointmentByNINAMutation from '../mutation/RequestAppointmentByNINAMutation'
 import RequestAppointmentByReceiptMutation from '../mutation/RequestAppointmentByReceiptMutation'
 import RequestAppointmentByDefaultMutation from '../mutation/RequestAppointmentByDefaultMutation'
+import AssignAppointmentToUserMutation from '../mutation/AssignAppointmentToUserMutation'
 
 
 
@@ -11,6 +12,7 @@ export default new GraphQLObjectType({
     fields: () => ({
         requestAppointmentByNINAMutation : RequestAppointmentByNINAMutation,
         requestAppointmentByReceiptMutation : RequestAppointmentByReceiptMutation,
-        requestAppointmentByDefaultMutation : RequestAppointmentByDefaultMutation
+        requestAppointmentByDefaultMutation : RequestAppointmentByDefaultMutation,
+        assignAppointmentToUserMutation : AssignAppointmentToUserMutation
     })
 });

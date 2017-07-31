@@ -46,6 +46,14 @@ export const User = DB.define('user', {
     } , {timestamps: false, tableName: 'users'}
 );
 
+export const User_Appointment = DB.define('user_appointment', {
+        appointment_number: Sequelize.STRING,
+        user_id: Sequelize.INTEGER,
+        start_date: Sequelize.DATE,
+    } , {timestamps: false, tableName: 'user_appointment'}
+);
+
+
 
 DB.sync({force: false});
 

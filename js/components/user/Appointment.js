@@ -3,9 +3,30 @@ import Relay from 'react-relay';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {Link} from 'react-router';
 import moment from 'moment';
+import AssignAppointmentToUser from '../mutation/AssignAppointmentToUserMutation'
+import UserService from '../service/AuthService'
 
 
 export default class Appointment extends React.Component {
+
+    onAppointmentAssign(appointmentNumber) {
+
+        var assignAppointmentToUser = new AssignAppointmentToUser({
+            viewer: this.props.viewer,
+            viewerId: this.props.viewer.id,
+            appointmentNumber: appointmentNumber,
+            userId: UserService.getUserId()
+        });
+
+        var onSuccess = () => console.log("OK!");
+
+        var onFailure = (transaction) => this.setState({message : "Désolé, nous avons rencontré un problème lors de l'enregistrement." +
+        " Contactez l'administrateur"});
+
+        Relay.Store.commitUpdate(assignAppointmentToUser, {onSuccess, onFailure})
+
+    }
+
 
     render() {
 
@@ -33,7 +54,11 @@ export default class Appointment extends React.Component {
             <td>
                 <div className="form-group">
                     <div className="col-md-12">
-                        <inupt type="submit" className="btn btn-default" onClick={console.log('')}><b>Traiter le RDV</b></inupt>
+                        <div className="btn-group" role="group">
+                            <button onClick={this.onAppointmentAssign.bind(this,appointment.number)} type="button" className="btn btn-default" >
+                                Traiter le RDV
+                            </button>
+                        </div>
                     </div>
                 </div>
             </td>
