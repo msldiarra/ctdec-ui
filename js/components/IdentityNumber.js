@@ -39,10 +39,11 @@ class IdentityNumber extends React.Component {
                                         <br/><br/>
                                         Ici, vous pouvez prendre un rendez-vous pour récupérer votre fiche individuelle.
                                         <br/><br/>
-                                        Pour une demande de fiche individuelle, il est nécessaire de fournir des informations.
-                                        <br/>
-                                        <br/>
-                                        Avez un des numéros suivants ?
+                                        Pour une demande de <b>Fiche Individuelle</b>, il est nécessaire de fournir des informations.
+                                        <br/><br/>
+                                        Vous pouvez faire la demande à partir de votre <b>numéro NINA</b> ou votre <b>numéro de formulaire de votre récipissé RAVEC</b>.
+                                        <br/><br/>
+                                        Cliquez sur le cas vous correspondant.
                                     </p>
                                 </div>
                             </div>
@@ -62,7 +63,7 @@ class IdentityNumber extends React.Component {
                                         <hr/>
                                         <br/>
                                         <button onClick={() => this.context.router.push('/appointment/default')} type="button" className={"btn btn-default " + (this.state.document ==  1? "active" : "")} value="3">
-                                            Cliquez ici si vous n'avez aucun numéro
+                                            Vous n'avez aucun numéro
                                         </button>
                                     </div>
                                 </div>
