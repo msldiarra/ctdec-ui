@@ -90,11 +90,11 @@ export const appointmentProcessingType = new GraphQLObjectType({
             id: globalIdField('AppointmentProcessing'),
             number : { type: GraphQLString, resolve(appointmentProcessing) { return appointmentProcessing.number } },
             start_date : { type: GraphQLMoment, resolve(appointmentProcessing) { return GraphQLMoment.serialize(appointmentProcessing.start_date)} },
-            end_date : { type: GraphQLMoment, resolve(appointmentProcessing) { return
+            end_date : { type: GraphQLMoment, resolve(appointmentProcessing) {
                 if(appointmentProcessing.end_date) {
-                    GraphQLMoment.serialize(appointmentProcessing.end_date)
+                    return GraphQLMoment.serialize(appointmentProcessing.end_date)
                 } else {
-                    null;
+                    return null;
                 }
             }},
             user : { type: userType, resolve(appointmentProcessing) { return DB.models.user.findOne({where: {id: {$eq: appointmentProcessing.user_id} }}) }

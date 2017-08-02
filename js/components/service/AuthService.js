@@ -37,6 +37,10 @@ class Auth {
         return JSON.parse(localStorage.getItem('user'))? JSON.parse(localStorage.getItem('user')).id : undefined;
     }
 
+    getUserLogin() {
+        return JSON.parse(localStorage.getItem('user'))? JSON.parse(localStorage.getItem('user')).login : undefined;
+    }
+
 
 }
 

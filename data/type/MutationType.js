@@ -4,6 +4,7 @@ import RequestAppointmentByNINAMutation from '../mutation/RequestAppointmentByNI
 import RequestAppointmentByReceiptMutation from '../mutation/RequestAppointmentByReceiptMutation'
 import RequestAppointmentByDefaultMutation from '../mutation/RequestAppointmentByDefaultMutation'
 import AssignAppointmentToUserMutation from '../mutation/AssignAppointmentToUserMutation'
+import ReleaseAppointmentAssignmentMutation from '../mutation/ReleaseAppointmentAssignmentMutation'
 
 
 
@@ -13,6 +14,7 @@ export default new GraphQLObjectType({
         requestAppointmentByNINAMutation : RequestAppointmentByNINAMutation,
         requestAppointmentByReceiptMutation : RequestAppointmentByReceiptMutation,
         requestAppointmentByDefaultMutation : RequestAppointmentByDefaultMutation,
-        assignAppointmentToUserMutation : AssignAppointmentToUserMutation
+        assignAppointmentToUserMutation : AssignAppointmentToUserMutation,
+        releaseAppointmentAssignmentMutation : ReleaseAppointmentAssignmentMutation
     })
 });

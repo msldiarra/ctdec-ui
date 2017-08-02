@@ -131,6 +131,7 @@ export default Relay.createContainer(Appointments, {
                                     id
                                     firstName
                                     lastName
+                                    login
                                 }
                             }
                         }

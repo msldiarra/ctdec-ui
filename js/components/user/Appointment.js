@@ -4,6 +4,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {Link} from 'react-router';
 import moment from 'moment';
 import AssignAppointmentToUser from '../mutation/AssignAppointmentToUserMutation'
+import ReleaseAppointmentAssignment from '../mutation/ReleaseAppointmentAssignmentMutation'
 import UserService from '../service/AuthService'
 
 
@@ -27,6 +28,23 @@ export default class Appointment extends React.Component {
 
     }
 
+    onAppointmentReleaseAssignment(appointmentNumber) {
+
+        var releaseAppointmentAssignment = new ReleaseAppointmentAssignment({
+            viewer: this.props.viewer,
+            viewerId: this.props.viewer.id,
+            appointmentNumber: appointmentNumber,
+            userId: UserService.getUserId()
+        });
+
+        var onSuccess = () => console.log("Assignment released !");
+
+        var onFailure = (transaction) => this.setState({message : "Désolé, nous avons rencontré un problème lors de l'enregistrement." +
+        " Contactez l'administrateur"});
+
+        Relay.Store.commitUpdate(releaseAppointmentAssignment, {onSuccess, onFailure})
+    }
+
 
     render() {
 
@@ -45,11 +63,16 @@ export default class Appointment extends React.Component {
         }
 
         if(appointment.processingHistory.edges.length > 0 && !appointment.processingHistory.edges[0].node.end_date) {
-            var user = appointment.processingHistory.edges[0].node.user;
-            processing = user.firstName + " traite le RDV"
-            disabled = "disabled"
+
+            if(appointment.processingHistory.edges[0].node.user.login == UserService.getUserLogin()) {
+                processing = <button onClick={this.onAppointmentReleaseAssignment.bind(this,appointment.number)} type="button" className={"btn btn-default"}>{"Ne plus traiter"}</button>
+            }
+            else {
+                var user = appointment.processingHistory.edges[0].node.user;
+                processing = <button onClick={this.onAppointmentAssign.bind(this,appointment.number)} type="button" className={"btn btn-default disabled"}>{user.firstName + " traite le RDV"}</button>
+            }
         } else {
-            processing = "Traiter le RDV"
+            processing = <button onClick={this.onAppointmentAssign.bind(this,appointment.number)} type="button" className={"btn btn-default " + disabled}>Traiter le RDV</button>
         }
 
         return (
@@ -63,9 +86,7 @@ export default class Appointment extends React.Component {
                 <div className="form-group">
                     <div className="col-md-12">
                         <div className="btn-group" role="group">
-                            <button onClick={this.onAppointmentAssign.bind(this,appointment.number)} type="button" className={"btn btn-default " + disabled}>
-                                {processing}
-                            </button>
+                            {processing}
                         </div>
                     </div>
                 </div>
