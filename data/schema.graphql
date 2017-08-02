@@ -11,6 +11,25 @@ type Appointment implements Node {
   fatherFirstName: String
   motherFirstName: String
   motherLastName: String
+  processingHistory(after: String, first: Int, before: String, last: Int): AppointmentProcessingConnection
+}
+
+type appointmentProcessing implements Node {
+  id: ID!
+  number: String
+  start_date: Date
+  end_date: Date
+  user: User
+}
+
+type AppointmentProcessingConnection {
+  pageInfo: PageInfo!
+  edges: [AppointmentProcessingEdge]
+}
+
+type AppointmentProcessingEdge {
+  node: appointmentProcessing
+  cursor: String!
 }
 
 type AppointmentsConnection {

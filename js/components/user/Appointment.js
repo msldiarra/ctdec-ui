@@ -34,7 +34,7 @@ export default class Appointment extends React.Component {
         let pathname = this.context.location.pathname != '/' ? this.context.location.pathname: '';
 
         var name = (appointment.lastName && appointment.firstName) ? appointment.firstName + ' ' + appointment.lastName: '';
-        var status;
+        var status, processing, disabled ="";
 
         if(appointment.status == 'PLANNED') {
             status =  <i className="fa fa-square orange" aria-hidden="true"></i>
@@ -42,6 +42,14 @@ export default class Appointment extends React.Component {
             status =  <i className="fa fa-square green" aria-hidden="true"></i>
         } else if(appointment.status == 'ISSUED') {
             status =  <i className="fa fa-square grey" aria-hidden="true"></i>
+        }
+
+        if(appointment.processingHistory.edges.length > 0 && !appointment.processingHistory.edges[0].node.end_date) {
+            var user = appointment.processingHistory.edges[0].node.user;
+            processing = user.firstName + " traite le RDV"
+            disabled = "disabled"
+        } else {
+            processing = "Traiter le RDV"
         }
 
         return (
@@ -55,8 +63,8 @@ export default class Appointment extends React.Component {
                 <div className="form-group">
                     <div className="col-md-12">
                         <div className="btn-group" role="group">
-                            <button onClick={this.onAppointmentAssign.bind(this,appointment.number)} type="button" className="btn btn-default" >
-                                Traiter le RDV
+                            <button onClick={this.onAppointmentAssign.bind(this,appointment.number)} type="button" className={"btn btn-default " + disabled}>
+                                {processing}
                             </button>
                         </div>
                     </div>

@@ -1,6 +1,6 @@
 import { GraphQLNonNull, GraphQLObjectType, GraphQLString, GraphQLList, GraphQLBoolean, GraphQLInt, GraphQLFloat, GraphQLScalarType, GraphQLError, Kind } from 'graphql';
 import { connectionArgs, connectionFromPromisedArray, globalIdField, nodeDefinitions, fromGlobalId, connectionDefinitions} from 'graphql-relay';
-import { DB, User, Places, Appointments }from '../database';
+import { DB, User, Places, Appointments, AppointmentProcessing }from '../database';
 import { Viewer, getViewer } from '../store/UserStore';
 import moment from 'moment';
 
@@ -16,6 +16,7 @@ export const {nodeInterface, nodeField} = nodeDefinitions(
         if (type === 'User') { return DB.models.user.findOne({where: {id: id}}); }
         if (type === 'Places') { return DB.models.places.findOne({where: {id: id}}); }
         if (type === 'Appointments') { return DB.models.appointments.findOne({where: {id: id}}); }
+        if (type === 'AppointmentProcessing') { return DB.models.appointment_processing.findOne({where: {id: id}}); }
         if (type === 'Viewer') { return getViewer(id)}
         else { return null; }
     },
@@ -27,6 +28,7 @@ export const {nodeInterface, nodeField} = nodeDefinitions(
         if (obj instanceof User.Instance) { return userType; }
         else if (obj instanceof Places.Instance) { return placeType; }
         else if (obj instanceof Appointments.Instance) { return appointmentType; }
+        else if (obj instanceof AppointmentProcessing.Instance) { return appointmentProcessingType; }
         else if (obj.id.startsWith('me')) { return viewerType; }
         else {
             return null;
@@ -64,8 +66,39 @@ export const appointmentType = new GraphQLObjectType({
             lastName: { type: GraphQLString, resolve(appointment) { return appointment.lastname } },
             fatherFirstName: { type: GraphQLString, resolve(appointment) { return appointment.fatherfirstname } },
             motherFirstName: { type: GraphQLString, resolve(appointment) { return appointment.motherfirstname } },
-            motherLastName: { type: GraphQLString, resolve(appointment) { return appointment.motherlastname } }
+            motherLastName: { type: GraphQLString, resolve(appointment) { return appointment.motherlastname } },
+            processingHistory : {
+                type: appointmentProcessingConnection,
+                description: "List of appointment processing",
+                args: connectionArgs,
+                resolve: (appointment, args) => {
+                    return connectionFromPromisedArray(DB.models.appointment_processing.findAll({
+                        where: {appointment_number: {$eq: appointment.number} },
+                        order: [['"id"', 'DESC']]
+                    }), args)
+                }
+        },
         }
+    },
+    interfaces: () => [nodeInterface]
+});
+
+export const appointmentProcessingType = new GraphQLObjectType({
+    name: 'appointmentProcessing',
+    fields: () => {
+        return {
+            id: globalIdField('AppointmentProcessing'),
+            number : { type: GraphQLString, resolve(appointmentProcessing) { return appointmentProcessing.number } },
+            start_date : { type: GraphQLMoment, resolve(appointmentProcessing) { return GraphQLMoment.serialize(appointmentProcessing.start_date)} },
+            end_date : { type: GraphQLMoment, resolve(appointmentProcessing) { return
+                if(appointmentProcessing.end_date) {
+                    GraphQLMoment.serialize(appointmentProcessing.end_date)
+                } else {
+                    null;
+                }
+            }},
+            user : { type: userType, resolve(appointmentProcessing) { return DB.models.user.findOne({where: {id: {$eq: appointmentProcessing.user_id} }}) }
+        }}
     },
     interfaces: () => [nodeInterface]
 });
@@ -176,6 +209,12 @@ export const {connectionType: appointmentConnection} =
     connectionDefinitions({
         name: 'Appointments',
         nodeType: appointmentType
+    });
+
+export const {connectionType: appointmentProcessingConnection} =
+    connectionDefinitions({
+        name: 'AppointmentProcessing',
+        nodeType: appointmentProcessingType
     });
 
 

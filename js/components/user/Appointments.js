@@ -120,6 +120,21 @@ export default Relay.createContainer(Appointments, {
                       fatherFirstName
                       motherFirstName
                       motherLastName
+                      processingHistory(first: 1) {
+                        edges {
+                            node {
+                                id
+                                number
+                                start_date
+                                end_date
+                                user {
+                                    id
+                                    firstName
+                                    lastName
+                                }
+                            }
+                        }
+                      }
                     }
                   },
             }

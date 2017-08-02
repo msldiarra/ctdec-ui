@@ -46,11 +46,11 @@ export const User = DB.define('user', {
     } , {timestamps: false, tableName: 'users'}
 );
 
-export const User_Appointment = DB.define('user_appointment', {
+export const AppointmentProcessing = DB.define('appointment_processing', {
         appointment_number: Sequelize.STRING,
         user_id: Sequelize.INTEGER,
         start_date: Sequelize.DATE,
-    } , {timestamps: false, tableName: 'user_appointment'}
+    } , {timestamps: false, tableName: 'appointmentprocessing'}
 );
 
 
